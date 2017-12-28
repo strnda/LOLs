@@ -18,9 +18,6 @@ eveRloving(love = NULL, size = 150, n.hearts = 50, colour1 = "hotpink",
 
 \item{colour2}{.}
 }
-\value{
-.
-}
 \description{
 Let the (R) world know...
 }

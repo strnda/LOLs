@@ -9,9 +9,6 @@ secRet(name = "Yannis")
 \arguments{
 \item{name}{Enter your name (as character string) to reveal your biggest secret...}
 }
-\value{
-.
-}
 \description{
 Function revealing that you are actually Bruce Wayne using a secret identity... (function returns grob - graphical object)
 }

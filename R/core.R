@@ -1,4 +1,4 @@
-lop <- c('ggplot2', 'data.table')
+lop <- c('ggplot2', 'data.table', 'RColorBrewer')
 to.instal <- lop[!(lop %in% row.names(installed.packages()))]
 
 if(length(to.instal) != 0) {install.packages(to.instal)}
@@ -11,8 +11,8 @@ lapply(lop, library, character.only = T)
 #'
 #' @param name Enter your name (as character string) to reveal your biggest secret...
 #'
-#' @return .
-#' @export .
+#' @return
+#' @export
 #'
 #' @examples library(RFun)
 #' secRet('Bruce Wayne')
@@ -116,8 +116,8 @@ secRet <- function(name = 'Yannis') {
 #' @param colour2 .
 #' @param n.hearts number of hearts within the grid
 #'
-#' @return .
-#' @export .
+#' @return
+#' @export
 #'
 #' @examples library(RFun)
 #' eveRloving()
@@ -159,4 +159,96 @@ eveRloving <- function(love = NULL, size = 150, n.hearts = 50, colour1 = 'hotpin
     theme(plot.title = element_text(hjust = 0.5))
 
   return(h)
+}
+
+#' Logo designer
+#'
+#' Simple function developed to desing company logos
+#'
+#' @param name Name of you company (char string)
+#' @param text_size Title size
+#' @param cols Logo colours - either avalid palette name or colour names
+#' @param additional_text Additional title text
+#' @param expr Posibility to add expressions to logo
+#' @param expr.index Expression index (possition)
+#' @param all_caps LOGICAL
+#' @param include_title LOGICAL Include the name of your company in logo title
+#'
+#' @return
+#' @export
+#'
+#' @examples library(RFun)
+#' a <- logo(name = 'KVHEM', additional_text = 'Katedra vodního hospodářství a environmentálního modelování')
+#' a + theme(title = element_text(size = 12.5))
+#'
+#' b <- logo(name = 'KVHEM', additional_text = 'Katedra vodního hospodářství \na environmentálního modelování', include_title = F)
+#' b + theme(panel.grid.major = element_blank(),
+#'           panel.grid.minor = element_blank(),
+#'           axis.ticks = element_blank(),
+#'           axis.text = element_blank(),
+#'           axis.line = element_blank(),
+#'           plot.title = element_text(size = 25, hjust = 0.25, color = 'steelblue4'))
+#'
+#' c <- logo(name = 'R-Users Group', text_size = 10, cols = 'Greens')
+#' c
+#'
+#' x <- logo(name = 'DRUtES', additional_text = '\nDual Richards Unsaturated Equation Solver', cols = c('royalblue4', 'lightsteelblue1'), expr = expression(integral()[Omega]), text_size = 9.5, include_title = F)
+#' x + theme(panel.grid.major = element_blank(),
+#'           panel.grid.minor = element_blank(),
+#'           axis.ticks = element_blank(),
+#'           axis.text = element_blank(),
+#'           axis.line = element_line(colour = 'royalblue4'))
+logo <- function(name, text_size = 20, cols = 'Blues', additional_text = NULL, expr = NULL, expr.index = seq_along(expr) - 1, all_caps = FALSE, include_title = TRUE) {
+
+  if(all_caps) {
+    lttrs <- unlist(strsplit(toupper(name), split = ''))
+  } else {
+    lttrs <- unlist(strsplit(name, split = ''))
+  }
+
+  ll <- length(lttrs)
+
+  lttrs.w.expr <- c(lttrs, as.character(expr))
+  id  <- c( seq_along(lttrs), expr.index + 0.5 )
+  lttrs.w.expr <- lttrs.w.expr[order(id)]
+
+  x <- 0:(length(lttrs.w.expr) - 1)
+  d <- data.frame(xmin = x, xmax = x + 1, ymin = 0, ymax = 1, fill = x, txt = lttrs.w.expr)
+
+  if(length(cols) != 1) {
+    col_pal <- colorRampPalette(as.vector(unlist(strsplit(cols, split = ' '))))(ll + 3)
+  } else {
+    col_pal <- rev(colorRampPalette(brewer.pal(9, cols))(ll + 4))
+  }
+
+  logo <- ggplot(d) +
+    geom_rect(aes(xmin = xmin, ymin = ymin, xmax = xmax, ymax = ymax, fill = factor(fill))) +
+    scale_fill_manual(values =  col_pal[1:dim(d)[1]]) +
+    theme_classic() +
+    theme(aspect.ratio = 1/ll,
+          plot.title = element_text(hjust = 0.5, family = 'URWBookman', colour = col_pal[1]),
+          plot.background = element_rect(fill = col_pal[length(col_pal) - 1]),
+          panel.background = element_rect(fill = col_pal[length(col_pal)- 1]),
+          axis.ticks = element_line(colour = col_pal[1]),
+          axis.text = element_text(colour = col_pal[1]),
+          axis.line = element_line(colour = col_pal[1]),
+          legend.position = 'none') +
+    annotate('text',
+             x = d$xmin + .5,
+             y = d$ymin + .5,
+             label = d$txt,
+             parse = !is.null(expr),
+             colour = col_pal[length(col_pal)],
+             size = text_size,
+             fontface = 1) +
+    labs(x = '',
+         y = '',
+         title = ifelse(include_title , paste(name,
+                                              ifelse(include_title & !is.null(additional_text),
+                                                     '-',
+                                                     ''),
+                                              additional_text),
+                        additional_text))
+
+  return(logo)
 }
