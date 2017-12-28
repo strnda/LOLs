@@ -1,10 +1,3 @@
-lop <- c('ggplot2', 'data.table', 'RColorBrewer')
-to.instal <- lop[!(lop %in% row.names(installed.packages()))]
-
-if(length(to.instal) != 0) {install.packages(to.instal)}
-
-lapply(lop, library, character.only = T)
-
 #' ...
 #'
 #'Function revealing that you are actually Bruce Wayne using a secret identity... (function returns grob - graphical object)
