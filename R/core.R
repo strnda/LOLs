@@ -253,7 +253,7 @@ logo <- function(name, text_size = 20, cols = 'Blues', additional_text = NULL, e
 #' @param initials Character string of you initials
 #' @param title LOGICAL Include funny painting title
 #'
-#' @return .
+#' @return
 #' @export
 #'
 #' @examples library(RFun)
@@ -300,3 +300,65 @@ mondRian <- function(initials = 'FS', title = F) {
 
   return(mond)
 }
+
+
+#' Smiley face :)
+#'
+#' @param joke LOGICAL Make it all a f-ing joke? (Watchmen comic book reference)
+#'
+#' @return
+#' @export
+#'
+#' @examples library(RFun)
+#' smiley() + theme_void()
+#' smiley(joke = T)
+smiley <- function(joke = F) {
+
+  x <- seq(0, 2*pi , length = 2500)
+
+  d0 <- data.table(x = sin(x)*25, y = cos(x)*25)
+  d1 <- d0[(abs(d0$x) < 15) & (d0$y < 10),]
+  d1 <- d1[, y := y + 7.5]
+  d1.1 <- d1*1.25
+  d1.1 <- d1.1[, y := y + 5.5]
+  d1.1 <- d1.1[(abs(d1.1$x) < max(abs(d1$x))) & (d1.1$y < max(d1$y)),]
+  d1.1 <- rbind(d1.1, d1)
+  d1.2.1 <- data.table(x = min(d1$x) + (2*cos(x)*cos(1) - 8*sin(x)*sin(-2))*.15, y = max(d1$y) + (2*cos(x)*sin(-2) + 8*sin(x)*cos(.725))*.15)
+  d1.2.2 <- data.table(x = max(d1$x) + (2*cos(x)*cos(1) - 8*sin(x)*sin(2))*.15, y = max(d1$y) + (2*cos(x)*sin(2) + 8*sin(x)*cos(.725))*.15)
+  d2 <- data.table(x = 10 + 4*cos(x), y = 7.5 + 8*sin(x))
+
+  if(joke) {
+    d3.1 <- data.table(x = - 15 + sin(x)*3.5, y = 15 + cos(x)*3.5)
+    d3.2 <- data.table(x = - 5 + sin(x)*.75, y = 5 + cos(x)*.75)
+    d3.3 <- data.table(x = - 15 + sin(x)*.25, y = 10 + cos(x)*.25)
+    d3.4 <- data.table(x = - 7.5 + sin(x)*.25, y = 15 + cos(x)*.25)
+    d3.5 <- data.table(x = - 16.5 + sin(x)*.5, y = 7.5 + cos(x)*.5)
+  }
+
+  face <- ggplot() +
+    geom_polygon(data = d0, aes(x = x, y = y), fill = 'gold', color = 'black', size = 5) +
+    geom_line(data = d1.1, aes(x = x, y = y), color = 'black', size = 2) +
+    geom_polygon(data = d1.2.1, aes(x = x, y = y), fill = 'black', color = 'black') +
+    geom_polygon(data = d1.2.2, aes(x = x, y = y), fill = 'black', color = 'black') +
+    geom_polygon(data = d2, aes(x = x, y = y), fill = 'black', color = 'black') +
+    geom_polygon(data = d2, aes(x = - x, y = y), fill = 'black', color = 'black') +
+    coord_fixed() +
+    theme_classic()
+
+  if(joke) {
+    face <- face +
+      geom_polygon(data = d3.1, aes(x = x, y = y), fill = 'red4', color = 'red4') +
+      geom_polygon(data = d3.2, aes(x = x, y = y), fill = 'red4', color = 'red4') +
+      geom_segment(aes(x = mean(d3.1$x), y = mean(d3.1$y), xend = mean(d3.2$x), yend = mean(d3.2$y)), color = 'red4', size = 2.5) +
+      geom_polygon(data = d3.3, aes(x = x, y = y), fill = 'red4', color = 'red4') +
+      geom_segment(aes(x = mean(d3.1$x) - 1.5, y = mean(d3.1$y), xend = mean(d3.3$x), yend = mean(d3.3$y)), color = 'red4', size = 1.5) +
+      geom_polygon(data = d3.4, aes(x = x, y = y), fill = 'red4', color = 'red4') +
+      geom_segment(aes(x = mean(d3.1$x), y = mean(d3.1$y) + 2, xend = mean(d3.4$x), yend = mean(d3.4$y)), color = 'red4', size = 1.5) +
+      geom_polygon(data = d3.5, aes(x = x, y = y), fill = 'red4', color = 'red4') +
+      geom_segment(aes(x = mean(d3.1$x) - 2, y = mean(d3.1$y) + 2, xend = mean(d3.5$x), yend = mean(d3.5$y)), color = 'red4', size = 2) +
+      theme(panel.background = element_rect(fill = 'red4'))
+  }
+
+  return(face)
+}
+

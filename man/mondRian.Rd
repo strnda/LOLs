@@ -11,14 +11,11 @@ mondRian(initials = "FS", title = F)
 
 \item{title}{LOGICAL Include funny painting title}
 }
-\value{
-.
-}
 \description{
 Recreation of famous Piet Mondrians painting in ggplot2, hopefully there will be a random Mondrian painting generator included in the future.
 }
 \examples{
 library(RFun)
 mondRian()
-mondRian('JRB') + theme_void
+mondRian('JRB') + theme_void()
 }
