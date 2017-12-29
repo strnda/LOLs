@@ -292,7 +292,7 @@ mondRian <- function(initials = 'FS', title = F) {
     geom_segment(aes(x = 1, y = 13, xend = 3, yend = 13), colour = '#181911', size = 3.25) +
     geom_segment(aes(x = 14, y = 13, xend = 20, yend = 13), colour = '#181911', size = 3.25) +
     geom_segment(aes(x = 17, y = 7.5, xend = 17, yend = 13), colour = '#181911', size = 3.25) +
-    geom_text(aes(x = 10, y = 1.25), colour = '#181911', size = 2, label = paste(initials, '17'), fontface = 'bold', alpha = .75) +
+    geom_text(aes(x = 10, y = 1.25), colour = '#181911', size = 2, label = paste(initials, format(Sys.Date(), '%y')), fontface = 'bold', alpha = .75) +
     coord_fixed() +
     labs(x = '', y = '', title = ifelse(title, expression(paste('the a', bold('R'),'t of ', bold('R'))), '')) +
     theme_classic() +
