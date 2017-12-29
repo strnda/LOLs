@@ -11,7 +11,7 @@ logo(name, text_size = 20, cols = "Blues", additional_text = NULL,
 \arguments{
 \item{name}{Name of you company (char string)}
 
-\item{text_size}{Title size}
+\item{text_size}{Logo text size}
 
 \item{cols}{Logo colours - either avalid palette name or colour names}
 
