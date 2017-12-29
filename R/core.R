@@ -202,20 +202,27 @@ logo <- function(name, text_size = 20, cols = 'Blues', additional_text = NULL, e
   ll <- length(lttrs)
 
   lttrs.w.expr <- c(lttrs, as.character(expr))
-  id  <- c( seq_along(lttrs), expr.index + 0.5 )
+  id  <- c(seq_along(lttrs), expr.index + 0.5)
   lttrs.w.expr <- lttrs.w.expr[order(id)]
 
   x <- 0:(length(lttrs.w.expr) - 1)
-  d <- data.frame(xmin = x, xmax = x + 1, ymin = 0, ymax = 1, fill = x, txt = lttrs.w.expr)
+  d <- data.table(xmin = x, xmax = x + 1, ymin = 0, ymax = 1, fill = x, txt = lttrs.w.expr, prs = nchar(lttrs.w.expr) != 1)
 
+  d.raw <- d[which(!d[, prs]), ]
+  d.expr <- d[which(d[, prs]), ]
   if(length(cols) != 1) {
     col_pal <- colorRampPalette(as.vector(unlist(strsplit(cols, split = ' '))))(ll + 3)
   } else {
     col_pal <- rev(colorRampPalette(brewer.pal(9, cols))(ll + 4))
   }
 
-  logo <- ggplot(d) +
-    geom_rect(aes(xmin = xmin, ymin = ymin, xmax = xmax, ymax = ymax, fill = factor(fill))) +
+  logo <- ggplot() +
+    geom_rect(data = d,
+              aes(xmin = xmin,
+                  ymin = ymin,
+                  xmax = xmax,
+                  ymax = ymax,
+                  fill = factor(fill))) +
     scale_fill_manual(values =  col_pal[1:dim(d)[1]]) +
     theme_classic() +
     theme(aspect.ratio = 1/ll,
@@ -226,14 +233,14 @@ logo <- function(name, text_size = 20, cols = 'Blues', additional_text = NULL, e
           axis.text = element_text(colour = col_pal[1]),
           axis.line = element_line(colour = col_pal[1]),
           legend.position = 'none') +
-    annotate('text',
-             x = d$xmin + .5,
-             y = d$ymin + .5,
-             label = d$txt,
-             parse = !is.null(expr),
-             colour = col_pal[length(col_pal)],
-             size = text_size,
-             fontface = 1) +
+    geom_text(data = d.raw,
+              aes(x = xmin + .5,
+                  y = ymin + .5,
+                  label = txt),
+              parse = F,
+              colour = col_pal[length(col_pal)],
+              size = text_size,
+              fontface = 1) +
     labs(x = '',
          y = '',
          title = ifelse(include_title , paste(name,
@@ -242,6 +249,16 @@ logo <- function(name, text_size = 20, cols = 'Blues', additional_text = NULL, e
                                                      ''),
                                               additional_text),
                         additional_text))
+
+  if(!is.null(expr)) {logo <- logo +
+    geom_text(data = d.expr,
+              aes(x = xmin + .5,
+                  y = ymin + .5,
+                  label = txt),
+              parse = T,
+              colour = col_pal[length(col_pal)],
+              size = text_size,
+              fontface = 1)}
 
   return(logo)
 }
@@ -304,7 +321,7 @@ mondRian <- function(initials = 'FS', title = F) {
 
 #' Smiley face :)
 #'
-#' @param joke LOGICAL Make it all a f-ing joke? (Watchmen comic book reference)
+#' @param joke LOGICAL Make it all a f-ing joke? (Watchmen comic-book reference)
 #'
 #' @return
 #' @export
