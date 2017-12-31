@@ -6,7 +6,8 @@ Author: Me
 Maintainer: <strnadf@fzp.czu.cz>
 Description: .
 License: .
-Imports: ggplot2, data.table, RColorBrewer
+Depends: ggplot2
+Imports: data.table, RColorBrewer
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 6.0.1
