@@ -350,6 +350,7 @@ smiley <- function(joke = F) {
 
   if(joke) {
     face <- face +
+      theme_void() +
       geom_polygon(data = d3.1, aes(x = x, y = y), fill = 'red4', color = 'red4') +
       geom_polygon(data = d3.2, aes(x = x, y = y), fill = 'red4', color = 'red4') +
       geom_segment(aes(x = mean(d3.1$x), y = mean(d3.1$y), xend = mean(d3.2$x), yend = mean(d3.2$y)), color = 'red4', size = 2.5) +
@@ -359,7 +360,10 @@ smiley <- function(joke = F) {
       geom_segment(aes(x = mean(d3.1$x), y = mean(d3.1$y) + 2, xend = mean(d3.4$x), yend = mean(d3.4$y)), color = 'red4', size = 1.5) +
       geom_polygon(data = d3.5, aes(x = x, y = y), fill = 'red4', color = 'red4') +
       geom_segment(aes(x = mean(d3.1$x) - 2, y = mean(d3.1$y) + 2, xend = mean(d3.5$x), yend = mean(d3.5$y)), color = 'red4', size = 2) +
-      theme(panel.background = element_rect(fill = 'red4'))
+      ggtitle('Quis custodiet ipsos custodes?') +
+      theme(panel.background = element_rect(fill = 'red4'),
+            plot.title = element_text(size = 20, hjust = 0.5, family = 'NewCenturySchoolbook', face = 'italic'))
+
   }
 
   return(face)
