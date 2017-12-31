@@ -7,7 +7,7 @@
 smiley(joke = F)
 }
 \arguments{
-\item{joke}{LOGICAL Make it all a f-ing joke? (Watchmen comic book reference)}
+\item{joke}{LOGICAL Make it all a f-ing joke? (Watchmen comic-book reference)}
 }
 \description{
 Smiley face :)

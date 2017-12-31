@@ -6,7 +6,7 @@
 \usage{
 logo(name, text_size = 20, cols = "Blues", additional_text = NULL,
   expr = NULL, expr.index = seq_along(expr) - 1, all_caps = FALSE,
-  include_title = TRUE)
+  include_title = TRUE, family = "Palatino", fontface = "bold")
 }
 \arguments{
 \item{name}{Name of you company (char string)}
@@ -24,6 +24,10 @@ logo(name, text_size = 20, cols = "Blues", additional_text = NULL,
 \item{all_caps}{LOGICAL}
 
 \item{include_title}{LOGICAL Include the name of your company in logo title}
+
+\item{family}{Font style}
+
+\item{fontface}{Font type}
 }
 \description{
 Simple function developed to desing company logos
@@ -33,7 +37,7 @@ library(RFun)
 a <- logo(name = 'KVHEM', additional_text = 'Katedra vodního hospodářství a environmentálního modelování')
 a + theme(title = element_text(size = 12.5))
 
-b <- logo(name = 'KVHEM', additional_text = 'Katedra vodního hospodářství \\na environmentálního modelování', include_title = F)
+b <- logo(name = 'KVHEM', additional_text = 'Katedra vodního hospodářství \\na environmentálního modelování', include_title = F, family = 'AvantGarde')
 b + theme(panel.grid.major = element_blank(),
           panel.grid.minor = element_blank(),
           axis.ticks = element_blank(),
@@ -41,10 +45,10 @@ b + theme(panel.grid.major = element_blank(),
           axis.line = element_blank(),
           plot.title = element_text(size = 25, hjust = 0.25, color = 'steelblue4'))
 
-c <- logo(name = 'R-Users Group', text_size = 10, cols = 'Greens')
+c <- logo(name = 'R-Users Group', text_size = 10, cols = 'Greens', family = 'Courier')
 c
 
-x <- logo(name = 'DRUtES', additional_text = '\\nDual Richards Unsaturated Equation Solver', cols = c('royalblue4', 'lightsteelblue1'), expr = expression(integral()[Omega]), text_size = 9.5, include_title = F)
+x <- logo(name = 'DRUtES', additional_text = '\\nDual Richards Unsaturated Equation Solver', cols = c('royalblue4', 'lightsteelblue1'), expr = expression(integral()[Omega]), text_size = 9.5, include_title = F, fontface = 'bold.italic')
 x + theme(panel.grid.major = element_blank(),
           panel.grid.minor = element_blank(),
           axis.ticks = element_blank(),

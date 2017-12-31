@@ -1,8 +1,8 @@
 #' ...
 #'
-#'Function revealing that you are actually Bruce Wayne using a secret identity... (function returns grob - graphical object)
+#'Function revealing that you are actually Bruce Wayne using a secret identity...
 #'
-#' @param name Enter your name (as character string) to reveal your biggest secret...
+#' @param name Enter your name (character string) to reveal your biggest secret...
 #'
 #' @return
 #' @export
@@ -166,6 +166,8 @@ eveRloving <- function(love = NULL, size = 150, n.hearts = 50, colour1 = 'hotpin
 #' @param expr.index Expression index (possition)
 #' @param all_caps LOGICAL
 #' @param include_title LOGICAL Include the name of your company in logo title
+#' @param family Font style
+#' @param fontface Font type
 #'
 #' @return
 #' @export
@@ -174,7 +176,7 @@ eveRloving <- function(love = NULL, size = 150, n.hearts = 50, colour1 = 'hotpin
 #' a <- logo(name = 'KVHEM', additional_text = 'Katedra vodního hospodářství a environmentálního modelování')
 #' a + theme(title = element_text(size = 12.5))
 #'
-#' b <- logo(name = 'KVHEM', additional_text = 'Katedra vodního hospodářství \na environmentálního modelování', include_title = F)
+#' b <- logo(name = 'KVHEM', additional_text = 'Katedra vodního hospodářství \na environmentálního modelování', include_title = F, family = 'AvantGarde')
 #' b + theme(panel.grid.major = element_blank(),
 #'           panel.grid.minor = element_blank(),
 #'           axis.ticks = element_blank(),
@@ -182,16 +184,16 @@ eveRloving <- function(love = NULL, size = 150, n.hearts = 50, colour1 = 'hotpin
 #'           axis.line = element_blank(),
 #'           plot.title = element_text(size = 25, hjust = 0.25, color = 'steelblue4'))
 #'
-#' c <- logo(name = 'R-Users Group', text_size = 10, cols = 'Greens')
+#' c <- logo(name = 'R-Users Group', text_size = 10, cols = 'Greens', family = 'Courier')
 #' c
 #'
-#' x <- logo(name = 'DRUtES', additional_text = '\nDual Richards Unsaturated Equation Solver', cols = c('royalblue4', 'lightsteelblue1'), expr = expression(integral()[Omega]), text_size = 9.5, include_title = F)
+#' x <- logo(name = 'DRUtES', additional_text = '\nDual Richards Unsaturated Equation Solver', cols = c('royalblue4', 'lightsteelblue1'), expr = expression(integral()[Omega]), text_size = 9.5, include_title = F, fontface = 'bold.italic')
 #' x + theme(panel.grid.major = element_blank(),
 #'           panel.grid.minor = element_blank(),
 #'           axis.ticks = element_blank(),
 #'           axis.text = element_blank(),
 #'           axis.line = element_line(colour = 'royalblue4'))
-logo <- function(name, text_size = 20, cols = 'Blues', additional_text = NULL, expr = NULL, expr.index = seq_along(expr) - 1, all_caps = FALSE, include_title = TRUE) {
+logo <- function(name, text_size = 20, cols = 'Blues', additional_text = NULL, expr = NULL, expr.index = seq_along(expr) - 1, all_caps = FALSE, include_title = TRUE, family = 'Palatino', fontface = 'bold') {
 
   if(all_caps) {
     lttrs <- unlist(strsplit(toupper(name), split = ''))
@@ -217,16 +219,11 @@ logo <- function(name, text_size = 20, cols = 'Blues', additional_text = NULL, e
   }
 
   logo <- ggplot() +
-    geom_rect(data = d,
-              aes(xmin = xmin,
-                  ymin = ymin,
-                  xmax = xmax,
-                  ymax = ymax,
-                  fill = factor(fill))) +
+    geom_rect(data = d, aes(xmin = xmin, ymin = ymin, xmax = xmax, ymax = ymax, fill = factor(fill))) +
     scale_fill_manual(values =  col_pal[1:dim(d)[1]]) +
     theme_classic() +
     theme(aspect.ratio = 1/ll,
-          plot.title = element_text(hjust = 0.5, family = 'URWBookman', colour = col_pal[1]),
+          plot.title = element_text(hjust = 0.5, family = family, face = fontface, colour = col_pal[1]),
           plot.background = element_rect(fill = col_pal[length(col_pal) - 1]),
           panel.background = element_rect(fill = col_pal[length(col_pal)- 1]),
           axis.ticks = element_line(colour = col_pal[1]),
@@ -234,31 +231,21 @@ logo <- function(name, text_size = 20, cols = 'Blues', additional_text = NULL, e
           axis.line = element_line(colour = col_pal[1]),
           legend.position = 'none') +
     geom_text(data = d.raw,
-              aes(x = xmin + .5,
-                  y = ymin + .5,
-                  label = txt),
-              parse = F,
-              colour = col_pal[length(col_pal)],
+              aes(x = xmin + .5, y = ymin + .5, label = txt),
+              parse = F, colour = col_pal[length(col_pal)],
               size = text_size,
-              fontface = 1) +
-    labs(x = '',
-         y = '',
-         title = ifelse(include_title , paste(name,
-                                              ifelse(include_title & !is.null(additional_text),
-                                                     '-',
-                                                     ''),
-                                              additional_text),
-                        additional_text))
+              family = family,
+              fontface = fontface) +
+    labs(x = '', y = '', title = ifelse(include_title , paste(name, ifelse(include_title & !is.null(additional_text), '-', ''), additional_text), additional_text))
 
   if(!is.null(expr)) {logo <- logo +
     geom_text(data = d.expr,
-              aes(x = xmin + .5,
-                  y = ymin + .5,
-                  label = txt),
+              aes(x = xmin + .5, y = ymin + .5, label = txt),
               parse = T,
               colour = col_pal[length(col_pal)],
               size = text_size,
-              fontface = 1)}
+              family = family,
+              fontface = fontface)}
 
   return(logo)
 }
@@ -317,7 +304,6 @@ mondRian <- function(initials = 'FS', title = F) {
 
   return(mond)
 }
-
 
 #' Smiley face :)
 #'
