@@ -1,6 +1,5 @@
 # RFun
-silly stuff doable in R
-======
+silly stuff doable in R (or collected works of my procrastination period)
 
 > devtools::install_github('strnda/RFun') 
 > 
@@ -21,4 +20,4 @@ silly stuff doable in R
 > 
 > RFun::mondRian() + theme_void()
 > 
-> RFun::smiley() + theme_void()
+> RFun::smiley(T)

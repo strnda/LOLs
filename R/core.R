@@ -213,7 +213,7 @@ logo <- function(name, text_size = 20, cols = 'Blues', additional_text = NULL, e
   d.raw <- d[which(!d[, prs]), ]
   d.expr <- d[which(d[, prs]), ]
   if(length(cols) != 1) {
-    col_pal <- colorRampPalette(as.vector(unlist(strsplit(cols, split = ' '))))(ll + 3)
+    col_pal <- colorRampPalette(as.vector(unlist(strsplit(cols, split = ' '))))(ll + 4)
   } else {
     col_pal <- rev(colorRampPalette(brewer.pal(9, cols))(ll + 4))
   }
