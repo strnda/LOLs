@@ -1,5 +1,5 @@
 # RFun
-silly stuff doable in R (or collected works of my procrastination period)
+silly stuff doable in R (or collected works of my procrastination periods)
 
 > devtools::install_github('strnda/RFun') 
 > 

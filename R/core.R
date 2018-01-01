@@ -201,14 +201,14 @@ logo <- function(name, text_size = 20, cols = 'Blues', additional_text = NULL, e
     lttrs <- unlist(strsplit(name, split = ''))
   }
 
-  ll <- length(lttrs)
-
   lttrs.w.expr <- c(lttrs, as.character(expr))
   id  <- c(seq_along(lttrs), expr.index + 0.5)
   lttrs.w.expr <- lttrs.w.expr[order(id)]
 
   x <- 0:(length(lttrs.w.expr) - 1)
   d <- data.table(xmin = x, xmax = x + 1, ymin = 0, ymax = 1, fill = x, txt = lttrs.w.expr, prs = nchar(lttrs.w.expr) != 1)
+
+  ll <- length(x)
 
   d.raw <- d[which(!d[, prs]), ]
   d.expr <- d[which(d[, prs]), ]
