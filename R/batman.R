@@ -11,7 +11,7 @@
 #'
 #' @examples 
 #' 
-#' library(RFun)
+#' library(LOLs)
 #' 
 #' secRet('Filip Strnad')
 #' 

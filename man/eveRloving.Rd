@@ -21,7 +21,7 @@ Lets yout spread the love for/of (R) everywhere...
 }
 \examples{
 
-library(RFun)
+library(LOLs)
 
 eveRloving()
 

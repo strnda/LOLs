@@ -49,7 +49,7 @@ rotate <- function(dta, degree) {
 #' @import ggplot2 data.table
 #' @examples 
 #' 
-#' library(RFun)
+#' library(LOLs)
 #' 
 #' eveRloving()
 #' 

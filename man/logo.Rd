@@ -34,7 +34,7 @@ Simple function developed to desing logos
 }
 \examples{
 
-library(RFun)
+library(LOLs)
 
 a <- logo(name = 'KVHEM', 
 additional_text = 'Katedra vodního hospodářství 

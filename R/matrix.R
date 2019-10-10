@@ -14,7 +14,7 @@
 #'
 #' @examples
 #' 
-#' library(RFun)
+#' library(LOLs)
 #' 
 #' matRix()
 #' 

@@ -1,4 +1,4 @@
 library(testthat)
-library(RFun)
+library(LOLs)
 
-test_check("RFun")
+test_check("LOLs")

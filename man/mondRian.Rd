@@ -19,7 +19,7 @@ Piet Mondrian - Composition with Large Red Plane, Yellow, Black, Grey and Blue, 
 }
 \examples{
 
-library(RFun)
+library(LOLs)
 
 mondRian()
 

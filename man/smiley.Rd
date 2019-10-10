@@ -14,7 +14,7 @@ puts a smile in your plot tab on a rainy day
 }
 \examples{
 
-library(RFun)
+library(LOLs)
 
 smiley() + theme_void()
 

@@ -9,7 +9,7 @@
 #'
 #' @examples 
 #' 
-#' library(RFun)
+#' library(LOLs)
 #'
 #' smiley() + theme_void()
 #' 

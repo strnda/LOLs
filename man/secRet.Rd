@@ -17,7 +17,7 @@ AKA Batman equation in polygons and ggplot2 (extention of \href{https://www.r-bl
 }
 \examples{
 
-library(RFun)
+library(LOLs)
 
 secRet('Filip Strnad')
 

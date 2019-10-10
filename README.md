@@ -1,20 +1,20 @@
-# RFun
+# LOLs
 
 <!-- badges: start -->
-[![Travis build status](https://travis-ci.org/strnda/RFun.svg?branch=master)](https://travis-ci.org/strnda/RFun)
-[![AppVeyor build status](https://ci.appveyor.com/api/projects/status/github/strnda/RFun?branch=master&svg=true)](https://ci.appveyor.com/project/strnda/RFun)
-[![CRAN status](https://www.r-pkg.org/badges/version/RFun)](https://CRAN.R-project.org/package=RFun)
+[![Travis build status](https://travis-ci.org/strnda/LOLs.svg?branch=master)](https://travis-ci.org/strnda/LOLs)
+[![AppVeyor build status](https://ci.appveyor.com/api/projects/status/github/strnda/LOLs?branch=master&svg=true)](https://ci.appveyor.com/project/strnda/LOLs)
+[![CRAN status](https://www.r-pkg.org/badges/version/LOLs)](https://CRAN.R-project.org/package=LOLs)
 [![license](https://img.shields.io/badge/license-GPL3-lightgrey.svg)](https://choosealicense.com/)
 <!-- badges: end -->
 
-The goal of RFun is to push the limits of creativity and imagination.
+The goal of LOLs is to push the limits of creativity and imagination.
 
 ## Installation
 
-You can install the released version of RFun from [CRAN](https://CRAN.R-project.org) with:
+You can install the released version of LOLs from [CRAN](https://CRAN.R-project.org) with:
 
 ``` r
-install.packages("RFun")
+install.packages("LOLs")
 ```
 
 ## Example
@@ -22,7 +22,7 @@ install.packages("RFun")
 This is a basic example which shows you how to solve a common problem:
 
 ``` r
-library(RFun)
+library(LOLs)
 ## basic example code
 ```
 

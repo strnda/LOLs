@@ -21,7 +21,7 @@ Extention of \href{https://www.r-bloggers.com/matrix-style-screensaver-in-r/}{R-
 }
 \examples{
 
-library(RFun)
+library(LOLs)
 
 matRix()
 

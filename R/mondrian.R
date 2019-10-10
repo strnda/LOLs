@@ -12,7 +12,7 @@
 #'
 #' @examples 
 #' 
-#' library(RFun)
+#' library(LOLs)
 #' 
 #' mondRian()
 #' 
